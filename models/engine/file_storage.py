@@ -7,7 +7,7 @@ class FileStorage:
     """This class manages storage of hbnb models in JSON format"""
     __file_path = 'file.json'
     __objects = {}
-    
+
     @property
     def cities(self):
         """
@@ -27,7 +27,7 @@ class FileStorage:
                 del (FileStorage.__objects[keyName])
                 self.save()
 
-    def all(self):
+    def all(self, cls=None):
         """
         Returns a dictionary of models currently in storage
         """
@@ -48,11 +48,11 @@ class FileStorage:
     def save(self):
         """Saves storage dictionary to file"""
         with open(FileStorage.__file_path, 'w') as f:
-            temp = {}
-            temp.update(FileStorage.__objects)
-            for key, val in temp.items():
-                temp[key] = val.to_dict()
-            json.dump(temp, f)
+            tmp = {}
+            tmp.update(FileStorage.__objects)
+            for key, val in tmp.items():
+                tmp[key] = val.to_dict()
+            json.dump(tmp, f)
 
     def reload(self):
         """Loads storage dictionary from file"""
@@ -70,11 +70,11 @@ class FileStorage:
                     'Review': Review
                   }
         try:
-            temp = {}
+            tmp = {}
             with open(FileStorage.__file_path, 'r') as f:
-                temp = json.load(f)
-                for key, val in temp.items():
-                        self.all()[key] = classes[val['__class__']](**val)
+                tmp = json.load(f)
+                for key, val in tmp.items():
+                    self.all()[key] = classes[val['__class__']](**val)
         except FileNotFoundError:
             pass
 
