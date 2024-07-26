@@ -1,6 +1,6 @@
 #!/usr/bin/python3
 """
-Module the defines the new class engine 'DBStorage'.
+Module that defines the new class engine 'DBStorage'.
 """
 from sqlalchemy.orm import sessionmaker, scoped_session
 from sqlalchemy import create_engine
